@@ -3,10 +3,6 @@ require_once(__DIR__ . '../config/configuration.php');
 require_once(__DIR__ . '../config/validation.php');
 session_start();
 
-
-
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -17,10 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_name'] = $user['name'];
         $_SESSION['user_type'] = $user['type'];
         
+        $user_id = $user['id'];
         if ($user['type'] == 'admin') {
-            header("Location: admin_dashboard.php");
+            header("Location: /../admin/admin.php?id=$user_id");
         } else {
-            header("Location: user_dashboard.php");
+            header("Location: /../public/user.php?id=$user_id");
         }
         exit();
     } else {
@@ -28,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
